@@ -1,0 +1,146 @@
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Project 03: Map Project</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+<link
+href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css"
+rel="stylesheet"
+/>
+<style>
+body {
+margin: 0;
+padding: 0;
+}
+h2,
+h3 {
+margin: 10px;
+font-size: 1.2em;
+}
+h3 {
+font-size: 1em;
+}
+p {
+font-size: 1em;
+margin: 10px;
+text-align: left;
+}
+.map-overlay {
+position: absolute;
+bottom: 0;
+right: 0;
+background: rgba(255, 255, 255, 0.8);
+margin-right: 20px;
+font-family: Arial, sans-serif;
+border-radius: 3px;
+}
+#map {
+position: absolute;
+top: 0;
+bottom: 0;
+width: 100%;
+}
+#features {
+top: 0;
+height: 150px;
+margin-top: 20px;
+width: 300px;
+}
+#legend {
+padding: 10px;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+line-height: 18px;
+height: 250px;
+margin-bottom: 40px;
+width: 200px;
+}
+.legend-key {
+display: inline-block;
+border-radius: 20%;
+border-style: solid;
+width: 25px;
+height: 25px;
+margin-right: 5px;
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="map-overlay" id="features">
+<h2>Shootings in Philadelphia vs Poverty Levels</h2>
+<p>Smaller circles signify non-fatal shootings while larger circles represental fatal shootings.</p>
+</div>
+<div class="map-overlay" id="legend"></div>
+
+<script>
+// define access token
+mapboxgl.accessToken = 'pk.eyJ1IjoiZHNnbjMzN2tpIiwiYSI6ImNrbm1qZjc0eTBhaWgybnBkMGE1Nml3aWYifQ.YmYehib6Dgd42aFqRct4Sg';
+ 
+//create map
+var map = new mapboxgl.Map({
+container: 'map', // container id
+style: 'mapbox://styles/dsgn337ki/cknnfnpdb1qrp17q9pz48cjfu' // map style URL from Mapbox Studio
+});
+ 
+// wait for map to load before adjusting it
+map.on('load', function () {
+// make a pointer cursor
+map.getCanvas().style.cursor = 'default';
+ 
+// make a pointer cursor
+map.getCanvas().style.cursor = 'default';
+ 
+// define layer names
+var layers = [
+'BLACK',
+'WHITE',
+'ASIAN',
+'NATIVE AMERICAN',
+'UNIDENTIFIED',
+'HIGH POVERTY',
+'LOW POVERTY'
+];
+
+var colors = [
+'#863c2d',
+'#f5e0c7',
+'#94a6ff',
+'#aaf292',
+'#ffadf3',
+'#ffffff',
+'#9c9c9c'
+];
+
+ 
+// create legend
+for (i = 0; i < layers.length; i++) {
+var layer = layers[i];
+var color = colors[i];
+var item = document.createElement('div');
+var key = document.createElement('span');
+key.className = 'legend-key';
+key.style.backgroundColor = color;
+
+var value = document.createElement('span');
+value.innerHTML = layer;
+item.appendChild(key);
+item.appendChild(value);
+legend.appendChild(item);
+}
+ 
+// change info window on hover
+map.on('mousemove', function (e) {
+var states = map.queryRenderedFeatures(e.point, {
+layers: ['statedata']
+});
+ 
+
+});
+});
+</script>
+</body>
+</html>
